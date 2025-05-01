@@ -1,0 +1,25 @@
+scalar Date
+
+type User {
+    userId: ID
+    firstName: String
+    lastName: String
+    email: String
+    budget: Float
+}
+
+type Pet {
+    petId: ID
+    name: String
+    description: String
+    owner: User
+    dateOfBirth: Date
+    rating: Int
+}
+
+type Query {
+    listUsers: [User]
+    createUsers: [User]
+    listPets: [Pet]
+    createPets: [Pet]
+}
