@@ -77,7 +77,7 @@ public class PetServiceImpl implements PetService {
                     if(pet.getOwner() == null && user.getBudget() >= pet.getPrice()) {
                         pet.setOwner(user);
                         petRepository.save(pet);
-                        user.setBudget(user.getBudget() - (Period.between(pet.getDateOfBirth(), LocalDate.now())).getYears() * ((Dog) pet).getRating());
+                        user.setBudget(user.getBudget() - pet.getPrice());
                         System.out.println("Woof, dog " + pet.getName() + " has owner " + user.getFirstName() + " " + user.getLastName());
                         userBoughtAPet = true;
                         pets.remove(pet);
@@ -88,7 +88,7 @@ public class PetServiceImpl implements PetService {
                     if(pet.getOwner() == null && user.getBudget() >= pet.getPrice()) {
                         pet.setOwner(user);
                         petRepository.save(pet);
-                        user.setBudget(user.getBudget() - (Period.between(pet.getDateOfBirth(), LocalDate.now())).getYears());
+                        user.setBudget(user.getBudget() - pet.getPrice());
                         System.out.println("Meow, cat " + pet.getName() + " has owner " + user.getFirstName() + " " + user.getLastName());
                         userBoughtAPet = true;
                         pets.remove(pet);
