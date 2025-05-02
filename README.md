@@ -20,7 +20,7 @@ connecting to H2 in-memory database: ![H2-Database](images/h2-console.png)
 
 (https://localhost:8080/create-pets)
 
-(https://localhost:8080/list-users)
+(https://localhost:8080/list-pets)
 
 (https://localhost:8080/buy)
 
