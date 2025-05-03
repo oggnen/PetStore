@@ -73,29 +73,22 @@ public class PetServiceImpl implements PetService {
             boolean userBoughtAPet = false;
 
             for(Pet pet: pets) {
-                if(pet instanceof Dog) {
-                    if(pet.getOwner() == null && user.getBudget() >= pet.getPrice()) {
+                if(pet.getOwner() == null && user.getBudget() >= pet.getPrice()) {
                         pet.setOwner(user);
                         petRepository.save(pet);
                         user.setBudget(user.getBudget() - pet.getPrice());
-                        System.out.println("Woof, dog " + pet.getName() + " has owner " + user.getFirstName() + " " + user.getLastName());
                         userBoughtAPet = true;
                         pets.remove(pet);
+                        if(pet instanceof Dog) {
+                            System.out.println("Woof, dog " + pet.getName() + " has owner " + user.getFirstName() + " " + user.getLastName());
+                        }
+                        else {
+                            System.out.println("Meow, cat " + pet.getName() + " has owner " + user.getFirstName() + " " + user.getLastName());
+                        }
                         break;
-                    }
-                }
-                else {
-                    if(pet.getOwner() == null && user.getBudget() >= pet.getPrice()) {
-                        pet.setOwner(user);
-                        petRepository.save(pet);
-                        user.setBudget(user.getBudget() - pet.getPrice());
-                        System.out.println("Meow, cat " + pet.getName() + " has owner " + user.getFirstName() + " " + user.getLastName());
-                        userBoughtAPet = true;
-                        pets.remove(pet);
-                        break;
-                    }
                 }
             }
+
             if(userBoughtAPet) {
                 noUsersWhoBoughtAPet++;
             }
