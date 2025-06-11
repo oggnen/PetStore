@@ -6,6 +6,7 @@ import com.example.PetStore.Repositories.*;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 import java.time.LocalDate;
 import java.time.Period;
@@ -67,6 +68,7 @@ public class PetServiceImpl implements PetService {
     public List<Pet> buy() {
         List<User> users = userRepository.findAll();
         List<Pet> pets = petRepository.findAll();
+        //List<Pet> pets = petRepository.findByOwnerIsNull();
         int noUsersWhoBoughtAPet = 0, noUsersWhoDidntBuyAPet = 0;
 
         for(User user: users) {
@@ -77,6 +79,7 @@ public class PetServiceImpl implements PetService {
                         pet.setOwner(user);
                         petRepository.save(pet);
                         user.setBudget(user.getBudget() - pet.getPrice());
+                        userRepository.save(user);
                         userBoughtAPet = true;
                         pets.remove(pet);
                         if(pet instanceof Dog) {
